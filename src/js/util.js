@@ -415,6 +415,10 @@ var Util;
                 return;
             }
 
+            if (element.childElementCount === 1 && element.children[0].tagName.toLowerCase() === 'p') {
+                this.unwrap(element.children[0], ownerDocument);
+            }
+
             var list = element.parentElement;
 
             if (list.parentElement.tagName.toLowerCase() === 'p') { // yes we need to clean up

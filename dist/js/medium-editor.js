@@ -813,6 +813,10 @@ var Util;
                 return;
             }
 
+            if (element.childElementCount === 1 && element.children[0].tagName.toLowerCase() === 'p') {
+                this.unwrap(element.children[0], ownerDocument);
+            }
+
             var list = element.parentElement;
 
             if (list.parentElement.tagName.toLowerCase() === 'p') { // yes we need to clean up
@@ -1150,7 +1154,7 @@ var ButtonsData;
             useQueryState: true,
             contentDefault: '<b>B</b>',
             contentFA: '<i class="fa fa-bold"></i>',
-            key: 'b'
+            key: 'B'
         },
         'italic': {
             name: 'italic',
@@ -1164,7 +1168,7 @@ var ButtonsData;
             useQueryState: true,
             contentDefault: '<b><i>I</i></b>',
             contentFA: '<i class="fa fa-italic"></i>',
-            key: 'i'
+            key: 'I'
         },
         'underline': {
             name: 'underline',
@@ -1178,7 +1182,7 @@ var ButtonsData;
             useQueryState: true,
             contentDefault: '<b><u>U</u></b>',
             contentFA: '<i class="fa fa-underline"></i>',
-            key: 'u'
+            key: 'U'
         },
         'strikethrough': {
             name: 'strikethrough',
@@ -1862,7 +1866,7 @@ var Selection;
 
         getSelectionRange: function (ownerDocument) {
             var selection = ownerDocument.getSelection();
-            if (selection.rangeCount === 0 || true === selection.isCollapsed) {
+            if (selection.rangeCount === 0) {
                 return null;
             }
             return selection.getRangeAt(0);
@@ -3462,7 +3466,7 @@ var AnchorForm;
         tagNames: ['a'],
         contentDefault: '<b>#</b>',
         contentFA: '<i class="fa fa-link"></i>',
-        key: 'k',
+        key: 'K',
 
         // Called when the button the toolbar is clicked
         // Overrides ButtonExtension.handleClick
@@ -6147,7 +6151,6 @@ function MediumEditor(elements, options) {
             this.preventSelectionUpdates = false;
         },
 
-        // NOT DOCUMENTED - exposed as extension helper and for backwards compatability
         checkSelection: function () {
             if (this.toolbar) {
                 this.toolbar.checkState();
