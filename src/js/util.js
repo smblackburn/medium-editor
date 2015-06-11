@@ -415,7 +415,7 @@ var Util;
                 return;
             }
 
-            if (element.childElementCount === 1 && element.children[0].tagName.toLowerCase() === 'p') {
+            if (element.childElementCount === 1 && element.children[0].tagName.toLowerCase() === 'span') {
                 this.unwrap(element.children[0], ownerDocument);
             }
 
