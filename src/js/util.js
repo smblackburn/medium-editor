@@ -412,6 +412,12 @@ var Util;
 
         cleanListDOM: function (ownerDocument, element) {
             if (element.tagName.toLowerCase() !== 'li') {
+                if (element.tagName.toLowerCase() === 'span' &&
+                    element.parentElement.childElementCount === 2 &&
+                    element.parentElement.children[1].tagName.toLowerCase() === 'br') {
+                    element.parentElement.removeChild(element.parentElement.children[1]);
+                    this.unwrap(element, ownerDocument);
+                }
                 return;
             }
 
